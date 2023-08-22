@@ -13,5 +13,13 @@ export default function EditRootBeer() {
     getSingleRootBeer(firebaseKey).then(setEditRootBeer);
   }, [firebaseKey]);
 
-  return (<RootBeerForm obj={editRootBeer} />);
+  return (
+    <div>
+      {editRootBeer.firebaseKey ? (
+        <RootBeerForm obj={editRootBeer} />
+      ) : (
+        <p>Loading...</p>
+      )}
+    </div>
+  );
 }
