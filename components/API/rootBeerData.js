@@ -28,7 +28,7 @@ const createRootBeer = (payload) => new Promise((resolve, reject) => {
 });
 
 const editRootBeer = (payload) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/rootBeers/${payload.firebaseKey}.json`, { // Specify the unique key for the resource
+  fetch(`${endpoint}/rootBeers/${payload.firebaseKey}.json`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
