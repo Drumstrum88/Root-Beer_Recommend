@@ -23,6 +23,9 @@ export default function NavBarAuth() {
             <Link href="/rootBeer/new" passHref>
               <Nav.Link>Recommend</Nav.Link>
             </Link>
+            <Link href="/Stores/stores" passHref>
+              <Nav.Link>Stores</Nav.Link>
+            </Link>
             <Button variant="danger" onClick={signOut}>Sign Out</Button>
           </Nav>
         </Navbar.Collapse>
