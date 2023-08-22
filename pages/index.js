@@ -1,24 +1,39 @@
-// import { Button } from 'react-bootstrap'; // TODO: COMMENT IN FOR AUTH
-// import { signOut } from '../utils/auth'; // TODO: COMMENT IN FOR AUTH
-// import { useAuth } from '../utils/context/authContext'; // TODO: COMMENT IN FOR AUTH
+import React, { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap'; // TODO: COMMENT IN FOR AUTH
+import Link from 'next/link';
+import { useAuth } from '../utils/context/authContext'; // TODO: COMMENT IN FOR AUTH
+import Signin from '../components/Signin'; // TODO: COMMENT IN FOR AUTH
+import { getCommunityRootBeers } from '../components/API/rootBeerData';
+import RootBeerCard from '../components/rootBeerCard';
 
 function Home() {
-  // const { user } = useAuth(); // TODO: COMMENT IN FOR AUTH
+  const [rootBeer, setRootBeer] = useState([]);
+  const { user } = useAuth();
 
-  const user = { displayName: 'Dr. T' }; // TODO: COMMENT OUT FOR AUTH
-  return (
-    <div
-      className="text-center d-flex flex-column justify-content-center align-content-center"
-      style={{
-        height: '90vh',
-        padding: '30px',
-        maxWidth: '400px',
-        margin: '0 auto',
-      }}
-    >
-      <h1>Hello {user.displayName}! </h1>
-    </div>
-  );
+  const getAllRootBeers = () => {
+    getCommunityRootBeers().then(setRootBeer);
+  };
+
+  useEffect(() => {
+    getAllRootBeers();
+  }, []);
+
+  if (user) {
+    return (
+      <div className="text-center my-4">
+        <Link href="/rootBeer/new" passHref>
+          <Button>Recommend A Root Beer!</Button>
+        </Link>
+        <div className="d-flex flex-wrap">
+          {rootBeer.map((beer) => (
+            <RootBeerCard key={beer.firebaseKey} rootBeerObj={beer} onUpdate={getAllRootBeers} />
+          ))}
+        </div>
+
+      </div>
+    );
+  }
+    <Signin />;
 }
 
 export default Home;
