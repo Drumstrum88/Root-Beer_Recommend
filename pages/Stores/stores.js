@@ -20,7 +20,7 @@ function AllStores() {
   if (user) {
     return (
       <div className="text-center my-4">
-        <Link href="/store/new" passHref>
+        <Link href="/Stores/new" passHref>
           <Button>Add A Store</Button>
         </Link>
         <div className="d-flex flex-wrap">

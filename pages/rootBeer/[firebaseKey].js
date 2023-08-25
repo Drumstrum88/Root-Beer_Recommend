@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Link from 'next/link';
-import viewRootBeerDetails from '../../components/API/mergedData';
+import { viewRootBeerDetails } from '../../components/API/mergedData';
 
 export default function ViewRootBeer() {
   const [rootBeerDetails, setRootBeerDetails] = useState({});
@@ -22,7 +22,7 @@ export default function ViewRootBeer() {
       </div>
       <div className="text-white ms-5 details">
         <h5>
-          {rootBeerDetails.name} at : {rootBeerDetails.storeObject?.name}
+          {rootBeerDetails.name} at : {rootBeerDetails.storeId}
         </h5>
         Root Beer Description: {rootBeerDetails.description}
         <hr />
