@@ -38,4 +38,50 @@ const deleteStore = (firebaseKey) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-export { getStores, getSingleStore, deleteStore };
+const getStoreRootBeers = (storeId) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/rootBeers.json?orderBy="rootBeers.storeId"&equalTO="${storeId}"`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const beers = Object.values(data);
+      resolve(beers);
+    })
+    .catch(reject);
+});
+
+const createStore = (payload) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/stores.json`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const { name } = data;
+      resolve({ firebaseKey: name, ...payload });
+    })
+    .catch(reject);
+});
+
+const updateStore = (payload) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/stores/${payload.firebaseKey}.json`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+    .then((response) => response.json())
+    .then(resolve)
+    .catch(reject);
+});
+
+export {
+  getStores, getSingleStore, deleteStore, getStoreRootBeers, createStore, updateStore,
+};

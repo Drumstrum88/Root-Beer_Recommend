@@ -107,7 +107,7 @@ function RootBeerForm({ obj }) {
             stores.map((store) => (
               <option
                 key={store.firebaseKey}
-                value={store.firebaseKey}
+                value={store.name}
               >
                 {store.name}
               </option>
