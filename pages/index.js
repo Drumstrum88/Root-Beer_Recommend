@@ -5,17 +5,24 @@ import { useAuth } from '../utils/context/authContext'; // TODO: COMMENT IN FOR 
 import Signin from '../components/Signin'; // TODO: COMMENT IN FOR AUTH
 import { getCommunityRootBeers } from '../components/API/rootBeerData';
 import RootBeerCard from '../components/rootBeerCard';
+import { getUserFavorites } from '../components/API/favoritesData';
 
 function Home() {
   const [rootBeer, setRootBeer] = useState([]);
+  const [, setUserFavorites] = useState([]);
   const { user } = useAuth();
 
   const getAllRootBeers = () => {
     getCommunityRootBeers().then(setRootBeer);
   };
 
+  const getTheUserFavorites = () => {
+    getUserFavorites().then(setUserFavorites);
+  };
+
   useEffect(() => {
     getAllRootBeers();
+    getTheUserFavorites();
   }, []);
 
   if (user) {

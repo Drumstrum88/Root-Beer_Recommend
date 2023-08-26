@@ -31,7 +31,11 @@ export default function User() {
       <h2>Your Recommended Root Beers</h2>
       <div>
         {userRootBeers.map((rootBeer) => (
-          <RootBeerCard key={rootBeer.firebaseKey} rootBeerObj={rootBeer} />
+          <RootBeerCard
+            key={rootBeer.firebaseKey}
+            rootBeerObj={rootBeer}
+            onUpdate={getUserRootBeers()}
+          />
         ))}
       </div>
     </div>
