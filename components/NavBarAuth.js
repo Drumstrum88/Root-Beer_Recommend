@@ -29,6 +29,9 @@ export default function NavBarAuth() {
             <Link href="/Stores/new" passHref>
               <Nav.Link>Add Store</Nav.Link>
             </Link>
+            <Link href="/user/user" passHref>
+              <Nav.Link>My Recommends</Nav.Link>
+            </Link>
             <Button variant="danger" onClick={signOut}>Sign Out</Button>
           </Nav>
         </Navbar.Collapse>

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import {
+  Button, FloatingLabel, Form, Image,
+} from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Form from 'react-bootstrap/Form';
-import { Button, Image } from 'react-bootstrap';
+import { useRouter } from 'next/router';
 import { useAuth } from '../utils/context/authContext';
 import { getStores } from './API/storeData';
 import { createRootBeer, editRootBeer } from './API/rootBeerData';
@@ -12,14 +12,15 @@ const initialState = {
   name: '',
   image: '',
   description: '',
+  storeId: '',
+  storeFirebaseKey: '',
 };
 
 function RootBeerForm({ obj }) {
   const [formInput, setFormInput] = useState(initialState);
-  // eslint-disable-next-line no-unused-vars
   const [stores, setStores] = useState([]);
-  const router = useRouter();
   const { user } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
     getStores().then(setStores);
@@ -40,13 +41,20 @@ function RootBeerForm({ obj }) {
     if (obj.firebaseKey) {
       editRootBeer(formInput).then(() => router.push(`/rootBeer/${obj.firebaseKey}`));
     } else {
-      const payload = { ...formInput, uid: user.uid };
-      createRootBeer(payload).then(({ name }) => {
-        const patchPayload = { ...payload, firebaseKey: name };
-        editRootBeer(patchPayload).then(() => {
-          router.push('/');
+      const selectedStore = stores.find((store) => store.name === formInput.storeId);
+      if (selectedStore) {
+        const payload = {
+          ...formInput,
+          uid: user.uid,
+          storeFirebaseKey: selectedStore.firebaseKey,
+        };
+        createRootBeer(payload).then(({ name }) => {
+          const patchPayload = { ...payload, firebaseKey: name };
+          editRootBeer(patchPayload).then(() => {
+            router.push('/');
+          });
         });
-      });
+      }
     }
   };
 

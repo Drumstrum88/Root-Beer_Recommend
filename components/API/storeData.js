@@ -38,21 +38,6 @@ const deleteStore = (firebaseKey) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getStoreRootBeers = (storeId) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/rootBeers.json?orderBy="rootBeers.storeId"&equalTO="${storeId}"`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      const beers = Object.values(data);
-      resolve(beers);
-    })
-    .catch(reject);
-});
-
 const createStore = (payload) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/stores.json`, {
     method: 'POST',
@@ -83,5 +68,5 @@ const updateStore = (payload) => new Promise((resolve, reject) => {
 });
 
 export {
-  getStores, getSingleStore, deleteStore, getStoreRootBeers, createStore, updateStore,
+  getStores, getSingleStore, deleteStore, createStore, updateStore,
 };

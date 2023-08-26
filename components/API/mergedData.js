@@ -1,28 +1,32 @@
-import { deleteRootBeer, getSingleRootBeer } from './rootBeerData';
-import { deleteStore, getSingleStore, getStoreRootBeers } from './storeData';
+import { deleteRootBeer, getSingleRootBeer, getStoreRootBeers } from './rootBeerData';
+import { deleteStore, getSingleStore } from './storeData';
 
 const viewRootBeerDetails = (firebaseKey) => new Promise((resolve, reject) => {
   getSingleRootBeer(firebaseKey).then((rootObj) => {
-    getSingleStore(rootObj.storeId).then((storeObj) => {
+    getSingleStore(rootObj.storeFirebaseKey).then((storeObj) => {
       resolve({ storeObj, ...rootObj });
     });
   }).catch((error) => reject(error));
 });
 
-const viewStoreDetails = (firebaseKey) => new Promise((resolve, reject) => {
-  Promise.all([getSingleStore(firebaseKey),
-    getStoreRootBeers(firebaseKey)])
-    .then(([storeObj, storeBeersArray]) => {
-      resolve({ ...storeObj, beers: storeBeersArray });
-    }).catch((error) => reject(error));
+const viewStoreDetails = (storeFirebaseKey) => new Promise((resolve, reject) => {
+  getSingleStore(storeFirebaseKey) // Assuming you have a function like this
+    .then((storeObj) => {
+      getStoreRootBeers(storeFirebaseKey) // Assuming you have a function like this
+        .then((storeBeersArray) => {
+          resolve({ ...storeObj, rootBeers: storeBeersArray });
+        })
+        .catch((error) => reject(error));
+    })
+    .catch((error) => reject(error));
 });
 
-const deleteStoreRootBeers = (storeId) => new Promise((resolve, reject) => {
-  getStoreRootBeers(storeId).then((beersArray) => {
+const deleteStoreRootBeers = (storeFirebaseKey) => new Promise((resolve, reject) => {
+  getStoreRootBeers(storeFirebaseKey).then((beersArray) => {
     const deleteBeerPromise = beersArray.map((beer) => deleteRootBeer(beer.firebaseKey));
 
     Promise.all(deleteBeerPromise).then(() => {
-      deleteStore(storeId).then(resolve);
+      deleteStore(storeFirebaseKey).then(resolve);
     });
   }).catch((error) => reject(error));
 });
