@@ -64,6 +64,36 @@ const getSingleRootBeer = (firebaseKey) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getStoreRootBeers = (storeFirebaseKey) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/rootBeers.json`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const rootBeers = Object.values(data).filter((rootBeer) => rootBeer.storeFirebaseKey === storeFirebaseKey);
+      resolve(rootBeers);
+    })
+    .catch(reject);
+});
+
+const getUserRootBeers = (uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/rootBeers.json`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const userRootBeers = Object.values(data).filter((rootBeer) => rootBeer.uid === uid);
+      resolve(userRootBeers);
+    })
+    .catch(reject);
+});
+
 export {
-  getCommunityRootBeers, createRootBeer, editRootBeer, deleteRootBeer, getSingleRootBeer,
+  getCommunityRootBeers, createRootBeer, editRootBeer, deleteRootBeer, getSingleRootBeer, getStoreRootBeers, getUserRootBeers,
 };

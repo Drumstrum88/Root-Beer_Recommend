@@ -6,6 +6,7 @@ import RootBeerCard from '../../components/rootBeerCard';
 
 export default function StoreDetails() {
   const [storeData, setStoreData] = useState(null);
+  const [rootBeers, setRootBeers] = useState([]);
   const router = useRouter();
 
   const { firebaseKey } = router.query;
@@ -13,7 +14,10 @@ export default function StoreDetails() {
   useEffect(() => {
     if (firebaseKey) {
       viewStoreDetails(firebaseKey)
-        .then((data) => setStoreData(data))
+        .then((data) => {
+          setStoreData(data);
+          setRootBeers(data.rootBeers);
+        })
         .catch((error) => {
           console.warn(error);
           setStoreData(null);
@@ -25,7 +29,7 @@ export default function StoreDetails() {
     return <Loading />;
   }
 
-  const { name, rootBeers } = storeData;
+  const { name } = storeData;
 
   return (
     <div>
