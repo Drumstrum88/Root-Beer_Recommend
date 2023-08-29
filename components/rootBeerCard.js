@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Card } from 'react-bootstrap';
 import Link from 'next/link';
-import propTypes from 'prop-types'; // Import propTypes from 'prop-types'
-import { deleteRootBeer } from './API/rootBeerData';
-import { addFavorite, removeFavorite, updateFavorite } from './API/favoritesData';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { HeartIcon } from '@heroicons/react/solid';
+import propTypes from 'prop-types';
+import {
+  addFavorite, deleteRootBeer, getUserRootBeers, removeFavorite,
+} from './API/rootBeerData';
 import { useAuth } from '../utils/context/authContext';
 
 export default function RootBeerCard({ rootBeerObj, onUpdate, userFavorites }) {
@@ -12,13 +15,15 @@ export default function RootBeerCard({ rootBeerObj, onUpdate, userFavorites }) {
   );
   const { user } = useAuth();
 
+  useEffect(() => {
+    setIsFavorite(
+      userFavorites.some((favorite) => favorite.rootBeerFirebaseKey === rootBeerObj.firebaseKey),
+    );
+  }, [userFavorites, rootBeerObj.firebaseKey]);
+
   const toggleFavorite = () => {
     if (isFavorite) {
-      // Remove from favorites
-      const favoriteToRemove = userFavorites.find(
-        (favorite) => favorite.rootBeerFirebaseKey === rootBeerObj.firebaseKey,
-      );
-      removeFavorite(favoriteToRemove.firebaseKey, user.uid)
+      removeFavorite(rootBeerObj.firebaseKey, user.uid)
         .then(() => {
           setIsFavorite(false);
           onUpdate();
@@ -27,12 +32,10 @@ export default function RootBeerCard({ rootBeerObj, onUpdate, userFavorites }) {
           console.error('Error removing favorite:', error);
         });
     } else {
-      // Add to favorites
       addFavorite(rootBeerObj.firebaseKey, user.uid)
-        .then((newFavoriteKey) => {
+        .then(() => {
           setIsFavorite(true);
           onUpdate();
-          updateFavorite(newFavoriteKey, { firebaseKey: newFavoriteKey });
         })
         .catch((error) => {
           console.error('Error adding favorite:', error);
@@ -41,7 +44,7 @@ export default function RootBeerCard({ rootBeerObj, onUpdate, userFavorites }) {
   };
   const deleteThisRootBeer = () => {
     if (window.confirm(`Delete ${rootBeerObj.name}?`)) {
-      deleteRootBeer(rootBeerObj.firebaseKey).then(() => onUpdate());
+      deleteRootBeer(rootBeerObj.firebaseKey).then(() => getUserRootBeers);
     }
   };
 
@@ -60,8 +63,13 @@ export default function RootBeerCard({ rootBeerObj, onUpdate, userFavorites }) {
         onClick={toggleFavorite}
         className="m-2"
       >
-        {isFavorite ? 'Remove Favorite' : 'Favorite'}
+        <HeartIcon
+          className={isFavorite ? 'text-red-500' : 'text-blue-500'}
+          h-6="false"
+          w-6="true"
+        />
       </Button>
+
       <Button
         variant="danger"
         onClick={deleteThisRootBeer}
@@ -81,7 +89,7 @@ RootBeerCard.propTypes = {
   }).isRequired,
   userFavorites: propTypes.arrayOf(
     propTypes.shape({
-      favoriteFirebaseKey: propTypes.string.isRequired, // Fix the prop name here
+      favoriteFirebaseKey: propTypes.string.isRequired,
       rootBeerFirebaseKey: propTypes.string.isRequired,
       uid: propTypes.string.isRequired,
     }),
