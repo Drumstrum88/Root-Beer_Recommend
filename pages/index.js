@@ -1,46 +1,62 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap'; // TODO: COMMENT IN FOR AUTH
+import { Button } from 'react-bootstrap';
 import Link from 'next/link';
-import { useAuth } from '../utils/context/authContext'; // TODO: COMMENT IN FOR AUTH
-import Signin from '../components/Signin'; // TODO: COMMENT IN FOR AUTH
-import { getCommunityRootBeers } from '../components/API/rootBeerData';
+import { useAuth } from '../utils/context/authContext';
+import Signin from '../components/Signin';
+import { getCommunityRootBeers, getUserFavorites } from '../components/API/rootBeerData';
 import RootBeerCard from '../components/rootBeerCard';
-import { getUserFavorites } from '../components/API/favoritesData';
 
 function Home() {
   const [rootBeer, setRootBeer] = useState([]);
-  const [, setUserFavorites] = useState([]);
   const { user } = useAuth();
+  const [userFavorites, setUserFavorites] = useState([]);
 
   const getAllRootBeers = () => {
     getCommunityRootBeers().then(setRootBeer);
   };
 
   const getTheUserFavorites = () => {
-    getUserFavorites().then(setUserFavorites);
+    if (user) {
+      getUserFavorites(user.uid).then(setUserFavorites);
+    }
   };
 
   useEffect(() => {
     getAllRootBeers();
-    getTheUserFavorites();
-  }, []);
+    if (user) {
+      getTheUserFavorites();
+    }
+  }, [user]);
 
-  if (user) {
-    return (
-      <div className="text-center my-4">
-        <Link href="/rootBeer/new" passHref>
-          <Button>Recommend A Root Beer!</Button>
-        </Link>
-        <div className="d-flex flex-wrap">
-          {rootBeer.map((beer) => (
-            <RootBeerCard key={beer.firebaseKey} rootBeerObj={beer} onUpdate={getAllRootBeers} />
-          ))}
-        </div>
+  const rootBeersWithFavorites = rootBeer.map((beer) => ({
+    ...beer,
+    isFavorite: userFavorites.some((favorite) => favorite.rootBeerFirebaseKey === beer.firebaseKey),
+  }));
 
-      </div>
-    );
-  }
-    <Signin />;
+  return (
+    <div className="text-center my-4">
+      {user ? (
+        <>
+          <Link href="/rootBeer/new" passHref>
+            <Button>Recommend A Root Beer!</Button>
+          </Link>
+          <div className="d-flex flex-wrap">
+            {rootBeersWithFavorites.map((beer) => (
+              <RootBeerCard
+                key={beer.firebaseKey}
+                rootBeerObj={beer}
+                userFavorites={userFavorites}
+                onUpdate={getAllRootBeers}
+              />
+            ))}
+          </div>
+        </>
+      ) : (
+        <Signin />
+      )}
+    </div>
+  );
 }
 
 export default Home;

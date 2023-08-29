@@ -1,35 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth } from '../../utils/context/authContext';
+import { getUserFavorites } from '../../components/API/rootBeerData';
 import RootBeerCard from '../../components/rootBeerCard';
-import { getSingleRootBeer } from '../../components/API/rootBeerData';
-import { getUserFavorites } from '../../components/API/favoritesData';
 
 export default function UserFavorites() {
   const { user } = useAuth();
   const [userFavorites, setUserFavorites] = useState([]);
 
-  // Function to fetch user favorites
-  const getTheUserFavorites = () => {
+  useEffect(() => {
     if (user && user.uid) {
       getUserFavorites(user.uid)
-        .then(async (favorites) => {
-          const favoriteRootBeers = await Promise.all(
-            favorites.map(async (favorite) => {
-              const rootBeer = await getSingleRootBeer(favorite.rootBeerFirebaseKey);
-              return { ...rootBeer, favoriteID: favorite.firebaseKey };
-            }),
-          );
-          setUserFavorites(favoriteRootBeers);
+        .then((favorites) => {
+          setUserFavorites(favorites);
         })
         .catch((error) => {
-          console.error('Error fetching user favorites', error);
+          console.error('Error fetching user favorites:', error);
         });
     }
-  };
-
-  useEffect(() => {
-    getTheUserFavorites();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   return (
@@ -41,7 +28,7 @@ export default function UserFavorites() {
             key={rootBeer.rootBeerFirebaseKey}
             rootBeerObj={rootBeer}
             userFavorites={userFavorites}
-            onUpdate={() => { getUserFavorites(); }}
+            onUpdate={() => getUserFavorites(user.uid).then((favorites) => setUserFavorites(favorites))}
           />
         ))}
       </div>

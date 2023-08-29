@@ -94,6 +94,87 @@ const getUserRootBeers = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getUserFavorites = (uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/userFavorites/${uid}.json`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        const favoriteKeys = Object.keys(data);
+        const userFavorites = favoriteKeys.map((key) => ({
+          favoriteFirebaseKey: key,
+          rootBeerFirebaseKey: data[key].rootBeerFirebaseKey,
+          uid: data[key].uid,
+        }));
+        resolve(userFavorites);
+      } else {
+        resolve([]);
+      }
+    })
+    .catch(reject);
+});
+
+const addFavorite = (rootBeerFirebaseKey, uid) => new Promise((resolve, reject) => {
+  const favorite = {
+    rootBeerFirebaseKey,
+    uid,
+    favorites: true,
+  };
+
+  fetch(`${endpoint}/userFavorites/${uid}.json`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(favorite),
+  })
+    .then((response) => response.json())
+    .then(({ name }) => {
+      const patchedFavorite = { ...favorite, firebaseKey: name };
+      resolve(patchedFavorite);
+    })
+    .catch(reject);
+});
+
+const removeFavorite = (rootBeerFirebaseKey, uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/userFavorites/${uid}.json`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const favoriteKey = Object.keys(data).find(
+        (key) => data[key].rootBeerFirebaseKey === rootBeerFirebaseKey,
+      );
+
+      if (favoriteKey) {
+        fetch(`${endpoint}/userFavorites/${uid}/${favoriteKey}.json`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((deleteResponse) => {
+            if (deleteResponse.ok) {
+              resolve();
+            } else {
+              reject(new Error('Failed to remove favorite'));
+            }
+          })
+          .catch(reject);
+      } else {
+        reject(new Error('Favorite not found'));
+      }
+    })
+    .catch(reject);
+});
+
 export {
-  getCommunityRootBeers, createRootBeer, editRootBeer, deleteRootBeer, getSingleRootBeer, getStoreRootBeers, getUserRootBeers,
+  getCommunityRootBeers, createRootBeer, editRootBeer, deleteRootBeer, getSingleRootBeer, getStoreRootBeers, getUserRootBeers, getUserFavorites, addFavorite, removeFavorite,
 };
