@@ -2,7 +2,7 @@
 import React from 'react';
 import Link from 'next/link';
 import {
-  Navbar, Container, Nav, Button,
+  Navbar, Container, Nav, Button, Image,
 } from 'react-bootstrap';
 import { signOut } from '../utils/auth';
 
@@ -10,6 +10,13 @@ export default function NavBarAuth() {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
+        <Image
+          src="/Rootbeer.png"
+          alt="Root Beer Logo"
+          width={75}
+          height={75}
+          className="d-inline-block align-top"
+        />
         <Link passHref href="/">
           <Navbar.Brand>Root Beer Recommend</Navbar.Brand>
         </Link>

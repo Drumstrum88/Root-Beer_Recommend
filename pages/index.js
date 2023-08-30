@@ -1,7 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
-import Link from 'next/link';
 import { useAuth } from '../utils/context/authContext';
 import Signin from '../components/Signin';
 import { getCommunityRootBeers, getUserFavorites } from '../components/API/rootBeerData';
@@ -38,9 +36,10 @@ function Home() {
     <div className="text-center my-4">
       {user ? (
         <>
-          <Link href="/rootBeer/new" passHref>
+          <div className="indexHead">Community Root Beers</div>
+          {/* <Link href="/rootBeer/new" passHref>
             <Button>Recommend A Root Beer!</Button>
-          </Link>
+          </Link> */}
           <div className="d-flex flex-wrap">
             {rootBeersWithFavorites.map((beer) => (
               <RootBeerCard

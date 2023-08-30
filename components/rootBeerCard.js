@@ -52,7 +52,12 @@ export default function RootBeerCard({ rootBeerObj, onUpdate, userFavorites }) {
   };
 
   return (
-    <Card style={{ width: '12rem', margin: '10px' }}>
+    <Card
+      class="card"
+      style={{
+        width: '12rem', margin: '10px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+      }}
+    >
       <Card.Img variant="top" src={rootBeerObj.image} alt={rootBeerObj.name} style={{ height: '225px' }} />
       <button
         type="button"
