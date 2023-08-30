@@ -11,7 +11,7 @@ export default function NavBarAuth() {
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
         <Image
-          src="/Rootbeer.png"
+          src="/CommunityLogo.png"
           alt="Root Beer Logo"
           width={75}
           height={75}
