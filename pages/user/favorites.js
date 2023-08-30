@@ -31,8 +31,8 @@ export default function UserFavorites() {
 
   return (
     <div>
-      <h1>User Favorites:</h1>
-      <div>
+      <div className="user-favorites">My Favorite Root Beers</div>
+      <div className="myFavorites">
         {userFavorites.map((favorite) => {
           const matchingRootBeer = rootBeers.find((rootBeer) => rootBeer.firebaseKey === favorite.rootBeerFirebaseKey);
           if (matchingRootBeer) {

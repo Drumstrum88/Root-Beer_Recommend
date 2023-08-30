@@ -25,19 +25,19 @@ export default function User() {
   }, [user]);
 
   return (
-    <div>
-      <h1>User Profile</h1>
-      <p>Last Sign-In Time: {lastSignInTime}</p>
-      <h2>Your Recommended Root Beers</h2>
+    <><div className="userRecommends">My Recommends</div>
       <div>
-        {userRootBeers.map((rootBeer) => (
-          <RootBeerCard
-            key={rootBeer.firebaseKey}
-            rootBeerObj={rootBeer}
-            onUpdate={getUserRootBeers()}
-          />
-        ))}
+        <div className="myRecommends">
+          {userRootBeers.map((rootBeer) => (
+            <RootBeerCard
+              key={rootBeer.firebaseKey}
+              rootBeerObj={rootBeer}
+              onUpdate={getUserRootBeers()}
+            />
+          ))}
+        </div>
+        <p>Last Sign-In Time: {lastSignInTime}</p>
       </div>
-    </div>
+    </>
   );
 }

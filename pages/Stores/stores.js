@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { Button } from 'react-bootstrap';
 import { getStores } from '../../components/API/storeData';
 import { useAuth } from '../../utils/context/authContext';
 import StoreCard from '../../components/storeCard';
@@ -20,9 +18,7 @@ function AllStores() {
   if (user) {
     return (
       <div className="text-center my-4">
-        <Link href="/Stores/new" passHref>
-          <Button>Add A Store</Button>
-        </Link>
+        <div className="stores">Community Stores</div>
         <div className="d-flex flex-wrap">
           {stores.map((store) => (
             <StoreCard
