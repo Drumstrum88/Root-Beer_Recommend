@@ -1,9 +1,12 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { useState, useEffect } from 'react';
-import { Button, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import Link from 'next/link';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { HeartIcon } from '@heroicons/react/solid';
 import propTypes from 'prop-types';
+import {
+  Eyeglasses, Pencil, Star, StarFill, Trash,
+} from 'react-bootstrap-icons';
 import {
   addFavorite, deleteRootBeer, getUserRootBeers, removeFavorite,
 } from './API/rootBeerData';
@@ -51,32 +54,33 @@ export default function RootBeerCard({ rootBeerObj, onUpdate, userFavorites }) {
   return (
     <Card style={{ width: '12rem', margin: '10px' }}>
       <Card.Img variant="top" src={rootBeerObj.image} alt={rootBeerObj.name} style={{ height: '225px' }} />
-      <Card.Title>{rootBeerObj.name}</Card.Title>
-      <Link href={`/rootBeer/${rootBeerObj.firebaseKey}`} passHref>
-        <Button variant="primary" className="m-2">View</Button>
-      </Link>
-      <Link href={`/rootBeer/edit/${rootBeerObj.firebaseKey}`} passHref>
-        <Button variant="info">Edit</Button>
-      </Link>
-      <Button
-        variant={isFavorite ? 'danger' : 'primary'}
+      <button
+        type="button"
+        className="btn btn-link"
         onClick={toggleFavorite}
-        className="m-2"
       >
-        <HeartIcon
-          className={isFavorite ? 'text-red-500' : 'text-blue-500'}
-          h-6="false"
-          w-6="true"
-        />
-      </Button>
-
-      <Button
-        variant="danger"
-        onClick={deleteThisRootBeer}
-        className="m-2"
-      >
-        Delete
-      </Button>
+        {isFavorite ? (
+          <StarFill className="text-red-500" size={24} />
+        ) : (
+          <Star className="text-blue-500" size={24} />
+        )}
+      </button>
+      <Card.Title>{rootBeerObj.name}</Card.Title>
+      <div className="button-container">
+        <Link href={`/rootBeer/${rootBeerObj.firebaseKey}`} passHref>
+          <Eyeglasses type="button" className="m-2" id="viewBtn">View</Eyeglasses>
+        </Link>
+        <Link href={`/rootBeer/edit/${rootBeerObj.firebaseKey}`} passHref>
+          <Pencil type="button" id="editBtn">Edit</Pencil>
+        </Link>
+        <Trash
+          type="button"
+          onClick={deleteThisRootBeer}
+          className="m-2"
+        >
+          Delete
+        </Trash>
+      </div>
     </Card>
   );
 }
