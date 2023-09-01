@@ -16,8 +16,13 @@ function StoreCard({ storeObj, onUpdate }) {
   };
 
   return (
-    <Card style={{ width: '18rem', margin: '10px' }}>
-      <Card.Body>
+    <Card
+      className="card"
+      style={{
+        width: '12rem', margin: '10px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+      }}
+    >
+      <Card.Body className="storeCard">
         <Card.Title>{storeObj.name}</Card.Title>
         <div className="button-container">
           <Link href={`/Stores/${storeObj.firebaseKey}`} passHref>

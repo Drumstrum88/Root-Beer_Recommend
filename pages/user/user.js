@@ -32,7 +32,7 @@ export default function User() {
             <RootBeerCard
               key={rootBeer.firebaseKey}
               rootBeerObj={rootBeer}
-              onUpdate={getUserRootBeers()}
+              onUpdate={() => getUserRootBeers()}
             />
           ))}
         </div>
