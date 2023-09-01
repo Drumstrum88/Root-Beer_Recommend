@@ -55,7 +55,7 @@ export default function StoreForm({ obj }) {
           required
         />
       </FloatingLabel>
-      <Button type="submit">{obj.firebaseKey ? 'Update' : 'Add'} Store</Button>
+      <Button className="genericBtn" type="submit">{obj.firebaseKey ? 'Update' : 'Add'} Store</Button>
     </Form>
   );
 }

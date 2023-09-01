@@ -32,11 +32,13 @@ export default function User() {
             <RootBeerCard
               key={rootBeer.firebaseKey}
               rootBeerObj={rootBeer}
-              onUpdate={getUserRootBeers()}
+              onUpdate={() => getUserRootBeers()}
             />
           ))}
         </div>
-        <p>Last Sign-In Time: {lastSignInTime}</p>
+        <div className="userData">
+          <p>Last Sign-In Time: {lastSignInTime}</p>
+        </div>
       </div>
     </>
   );

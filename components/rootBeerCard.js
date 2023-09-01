@@ -53,7 +53,7 @@ export default function RootBeerCard({ rootBeerObj, onUpdate, userFavorites }) {
 
   return (
     <Card
-      class="card"
+      className="card"
       style={{
         width: '12rem', margin: '10px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
       }}

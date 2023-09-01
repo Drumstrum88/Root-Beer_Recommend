@@ -42,7 +42,7 @@ export default function NavBarAuth() {
             <Link href="/user/favorites" passHref>
               <Nav.Link>My Favorites</Nav.Link>
             </Link>
-            <Button variant="danger" onClick={signOut}>Sign Out</Button>
+            <Button className="signOut" variant="danger" onClick={signOut}>Sign Out</Button>
           </Nav>
         </Navbar.Collapse>
       </Container>
