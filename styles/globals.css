@@ -81,6 +81,13 @@ body {
   border-radius: 5%;
 }
 
+.signOut {
+  background-color: rgb(203, 0, 0);
+  border: black inset 1px;
+  width: 150px;
+}
+
+.userData,
 .indexHead,
 .user-favorites,
 .userRecommends,

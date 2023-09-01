@@ -36,7 +36,9 @@ export default function User() {
             />
           ))}
         </div>
-        <p>Last Sign-In Time: {lastSignInTime}</p>
+        <div className="userData">
+          <p>Last Sign-In Time: {lastSignInTime}</p>
+        </div>
       </div>
     </>
   );
