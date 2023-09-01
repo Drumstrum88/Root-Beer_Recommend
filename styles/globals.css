@@ -87,7 +87,10 @@ body {
   width: 150px;
 }
 
-.userData,
+.userData {
+  background-color: gray;
+  color: aliceblue;
+}
 .indexHead,
 .user-favorites,
 .userRecommends,
