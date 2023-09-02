@@ -18,7 +18,201 @@ a {
 }
 
 body {
-  background-color: #88effd;
+  width: 100%;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background-size: 300% 300%;
+  background-image: linear-gradient(-45deg, rgb(194, 100, 83) 0%, rgb(27, 81, 135) 25%, rgb(55, 127, 55) 51%, rgb(18, 134, 134) 100%);
+  background-image: linear-gradient(-45deg, #e33b3b 0%, #505258 25%, #8993b5 50%, #083560 100%);
+  animation: background-shift 20s ease infinite;
+
+@keyframes background-shift
+  0%
+    background-position: 0% 50%
+  50%
+    background-position: 100% 50%
+  100%
+    background-position: 0% 50%;
 }
 
+.button-container {
+  background-color:rgb(231, 192, 21);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  border-radius: 5%;
+}
 
+.d-inline-block {
+  border-radius: 8%;
+  border: black inset 1px;
+}
+
+.card {
+  background-color: lightgray;
+  box-shadow: rgb(108, 136, 204) 0px 5px 10px;
+  flex: 0 0 calc(33.33% - 20px);
+  border-radius: 2%;
+  border: black inset 1px;
+  display: flex;
+  flex-direction: column;
+ text-align: center;
+  justify-content: center;
+}
+
+.text-red-500 {
+  color: rgb(231, 192, 21);
+}
+
+.text-blue-500 {
+  color: rgb(3, 3, 3);
+}
+
+.genericBtn{
+  background-color: rgb(231, 192, 21);
+  border: black 1px inset;
+  margin-top: 1vh;
+}
+
+.genericImage {
+  border: black 1px inset;
+  border-radius: 5%;
+}
+
+.signOut {
+  background-color: rgb(203, 0, 0);
+  border: black inset 1px;
+  width: 150px;
+}
+
+.userData {
+  background-color: gray;
+  color: aliceblue;
+}
+.communityFavorites,
+.indexHead,
+.user-favorites,
+.userRecommends,
+.stores {
+  margin-top: auto;
+  font-size: x-large;
+  background-color: #2E3A4F;
+  color: aliceblue;
+  height: 125px;
+  margin: 100px;
+  border-radius: 8px;
+  box-shadow: rgb(108, 136, 204) 0px 5px 10px;
+  max-width: auto;
+  text-align: center;
+  border: black inset 1px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
+}
+
+.favorite-count {
+  text-align: center;
+}
+
+.rankTable{
+  background-color:#2E3A4F ;
+  color: aliceblue;
+}
+table {
+  margin: 20px;
+  box-shadow:rgb(108, 136, 204) 0px 5px 10px;
+  background-color:#2E3A4F ;
+  color: aliceblue;
+}
+
+th {
+  border-right: 1px solid lightgrey;
+  padding: 10px;
+}
+.center-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.myFavorites {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.myRecommends {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+#sign-in {
+  color: aliceblue;
+}
+
+.signIn {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
+}
+
+#signInBtn {
+  color: aliceblue;
+  background-color: rgb(231, 192, 21);
+  border: black inset 1px;
+  margin-top: 10px;
+  width: 15vh;
+}
+
+#sign-in-logo {
+  width: 400px;
+  height: auto;
+  border-radius: 8%;
+  border: black 2px inset;
+  box-shadow: rgb(108, 136, 204) 0px 5px 10px;
+}
+
+@media (max-width: 768px) {
+  .indexHead,
+  .user-favorites,
+  .userRecommends,
+  .stores {
+    margin: 20px;
+    height: 100px;
+    padding-top: 3vh;
+  }
+
+  .button-container {
+    flex-direction: column;
+    align-items: center; 
+  }
+
+  .card {
+    flex: 0 0 calc(50% - 20px);
+  }
+
+  .myFavorites,
+  .myRecommends {
+    justify-content: center; 
+  }
+}
+
+@media (min-width: 1200px) {
+  .indexHead,
+  .user-favorites,
+  .userRecommends,
+  .stores {
+    margin: 0 auto; 
+    padding-top: 5vh;
+  }
+
+  .card {
+    flex: 0 0 calc(25% - 20px); 
+  }
+}

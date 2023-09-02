@@ -1,10 +1,11 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Container, Image } from 'react-bootstrap'; // Import Image and Container
 import { signIn } from '../utils/auth';
 
 function Signin() {
   return (
     <div
+      id="Sign-in"
       className="text-center d-flex flex-column justify-content-center align-content-center"
       style={{
         height: '90vh',
@@ -13,11 +14,19 @@ function Signin() {
         margin: '0 auto',
       }}
     >
-      <h1>Hi there!</h1>
-      <p>Click the button below to login!</p>
-      <Button type="button" size="lg" className="copy-btn" onClick={signIn}>
-        Sign In
-      </Button>
+      <Container className="signIn">
+        <Image
+          id="sign-in-logo"
+          src="/CommunityLogo.png"
+          alt="Root Beer Logo"
+          width={75}
+          height={75}
+          className="d-inline-block align-top"
+        />
+        <Button id="signInBtn" type="button" size="lg" className="copy-btn" onClick={signIn}>
+          Sign In
+        </Button>
+      </Container>
     </div>
   );
 }

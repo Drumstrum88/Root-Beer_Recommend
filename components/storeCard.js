@@ -1,6 +1,8 @@
-import { Card, Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { Eyeglasses, Trash } from 'react-bootstrap-icons';
 import { deleteStore } from './API/storeData';
 
 function StoreCard({ storeObj, onUpdate }) {
@@ -14,17 +16,24 @@ function StoreCard({ storeObj, onUpdate }) {
   };
 
   return (
-    <Card style={{ width: '18rem', margin: '10px' }}>
-      <Card.Body>
+    <Card
+      className="card"
+      style={{
+        width: '12rem', margin: '10px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+      }}
+    >
+      <Card.Body className="storeCard">
         <Card.Title>{storeObj.name}</Card.Title>
-        <Link href={`/Stores/${storeObj.firebaseKey}`} passHref>
-          <Button variant="primary" className="m-2">
-            Store Details
-          </Button>
-        </Link>
-        <Button variant="danger" onClick={deleteThisStore} className="m-2">
-          DELETE
-        </Button>
+        <div className="button-container">
+          <Link href={`/Stores/${storeObj.firebaseKey}`} passHref>
+            <Eyeglasses type="button" className="m-2">
+              Store Details
+            </Eyeglasses>
+          </Link>
+          <Trash type="button" onClick={deleteThisStore} className="m-2">
+            DELETE
+          </Trash>
+        </div>
       </Card.Body>
     </Card>
   );

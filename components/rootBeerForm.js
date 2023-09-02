@@ -124,7 +124,7 @@ function RootBeerForm({ obj }) {
         </Form.Select>
       </FloatingLabel>
 
-      <Button type="submit">{obj.firebaseKey ? 'Update' : 'Recommend'} Root Beer</Button>
+      <Button className="genericBtn" type="submit">{obj.firebaseKey ? 'Update' : 'Recommend'} Root Beer</Button>
     </Form>
   );
 }

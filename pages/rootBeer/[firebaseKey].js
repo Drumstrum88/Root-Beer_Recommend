@@ -18,7 +18,7 @@ export default function ViewRootBeer() {
   return (
     <div className="mt-5 d-flex flex-wrap">
       <div className="d-flex flex-column">
-        <img src={rootBeerDetails.image} alt={rootBeerDetails.name} style={{ width: '300px' }} />
+        <img src={rootBeerDetails.image} alt={rootBeerDetails.name} style={{ width: '300px' }} className="genericImage" />
       </div>
       <div className="text-white ms-5 details">
         <h5>
@@ -28,7 +28,7 @@ export default function ViewRootBeer() {
         <hr />
       </div>
       <Link href={`/rootBeer/edit/${rootBeerDetails.firebaseKey}`} passHref>
-        <Button>Edit Details</Button>
+        <Button className="genericBtn">Edit Details</Button>
       </Link>
     </div>
   );
