@@ -175,6 +175,17 @@ const removeFavorite = (rootBeerFirebaseKey, uid) => new Promise((resolve, rejec
     .catch(reject);
 });
 
+const getCommunityFavorites = () => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/userFavorites.json`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
 export {
-  getCommunityRootBeers, createRootBeer, editRootBeer, deleteRootBeer, getSingleRootBeer, getStoreRootBeers, getUserRootBeers, getUserFavorites, addFavorite, removeFavorite,
+  getCommunityRootBeers, createRootBeer, editRootBeer, deleteRootBeer, getSingleRootBeer, getStoreRootBeers, getUserRootBeers, getUserFavorites, addFavorite, removeFavorite, getCommunityFavorites,
 };
