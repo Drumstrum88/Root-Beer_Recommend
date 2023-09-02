@@ -29,17 +29,18 @@ export default function StoreDetails() {
     return <Loading />;
   }
 
-  const { name } = storeData;
-
   return (
     <div>
-      <h1>Store Details</h1>
-      <h2>{name}</h2>
-      <h3>Root Beers at this location:</h3>
+      <h2>{storeData.name}</h2>
       {Array.isArray(rootBeers) && rootBeers.length > 0 ? (
-        rootBeers.map((rootBeer) => (
-          <RootBeerCard key={rootBeer.firebaseKey} rootBeerObj={rootBeer} />
-        ))
+        <>
+          <div className="stores">{rootBeers[0].storeId}</div>
+          <div className="rootBeerContainer">
+            {rootBeers.map((rootBeer) => (
+              <RootBeerCard key={rootBeer.firebaseKey} rootBeerObj={rootBeer} />
+            ))}
+          </div>
+        </>
       ) : (
         <p>No Root Beers At This Location</p>
       )}
