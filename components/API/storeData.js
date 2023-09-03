@@ -66,7 +66,20 @@ const updateStore = (payload) => new Promise((resolve, reject) => {
     .then(resolve)
     .catch(reject);
 });
-
+const getUserStores = (uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/stores.json`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const userStores = Object.values(data).filter((store) => store.uid === uid);
+      resolve(userStores);
+    })
+    .catch(reject);
+});
 export {
-  getStores, getSingleStore, deleteStore, createStore, updateStore,
+  getStores, getSingleStore, deleteStore, createStore, updateStore, getUserStores,
 };

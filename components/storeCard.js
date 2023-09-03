@@ -3,15 +3,26 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { CurrencyDollar, Eyeglasses, Trash } from 'react-bootstrap-icons';
-import { deleteStore } from './API/storeData';
+import { deleteStore, getUserStores } from './API/storeData';
+import { useAuth } from '../utils/context/authContext';
 
-function StoreCard({ storeObj, onUpdate }) {
+function StoreCard({ storeObj }) {
+  const { user } = useAuth();
   if (!storeObj) {
     return <p>No Store Data Available</p>;
   }
   const deleteThisStore = () => {
-    if (window.confirm('Are you sure you want to delete this store and all associated root beers?')) {
-      deleteStore(storeObj.firebaseKey).then(() => onUpdate());
+    // eslint-disable-next-line react/prop-types
+    if (user && user.uid === storeObj.uid) {
+      if (window.confirm(`Delete ${storeObj.name}?`)) {
+        deleteStore(storeObj.firebaseKey)
+          .then(() => getUserStores)
+          .catch((error) => {
+            console.error('Error deleting store:', error);
+          });
+      }
+    } else {
+      alert('You do not have permission to delete this store.');
     }
   };
 
@@ -48,11 +59,9 @@ StoreCard.propTypes = {
     storeSite: PropTypes.string,
     firebaseKey: PropTypes.string,
   }),
-  onUpdate: PropTypes.func,
 };
 StoreCard.defaultProps = {
   storeObj: null,
-  onUpdate: () => {},
 };
 
 export default StoreCard;
