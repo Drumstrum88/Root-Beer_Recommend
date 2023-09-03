@@ -46,8 +46,17 @@ export default function RootBeerCard({ rootBeerObj, onUpdate, userFavorites }) {
     }
   };
   const deleteThisRootBeer = () => {
-    if (window.confirm(`Delete ${rootBeerObj.name}?`)) {
-      deleteRootBeer(rootBeerObj.firebaseKey).then(() => getUserRootBeers);
+    // eslint-disable-next-line react/prop-types
+    if (user.uid === rootBeerObj.uid) { // Check if the current user's UID matches the UID of the root beer
+      if (window.confirm(`Delete ${rootBeerObj.name}?`)) {
+        deleteRootBeer(rootBeerObj.firebaseKey)
+          .then(() => getUserRootBeers)
+          .catch((error) => {
+            console.error('Error deleting root beer:', error);
+          });
+      }
+    } else {
+      alert('You do not have permission to delete this root beer.');
     }
   };
 
