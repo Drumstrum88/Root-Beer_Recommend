@@ -2,7 +2,7 @@ import { Card } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { Eyeglasses, Trash } from 'react-bootstrap-icons';
+import { CurrencyDollar, Eyeglasses, Trash } from 'react-bootstrap-icons';
 import { deleteStore } from './API/storeData';
 
 function StoreCard({ storeObj, onUpdate }) {
@@ -30,6 +30,9 @@ function StoreCard({ storeObj, onUpdate }) {
               Store Details
             </Eyeglasses>
           </Link>
+          <a href={storeObj.storeSite} target="_blank" rel="noopener noreferrer">
+            <CurrencyDollar type="button" className="m-2">{storeObj.storeSite}</CurrencyDollar>
+          </a>
           <Trash type="button" onClick={deleteThisStore} className="m-2">
             DELETE
           </Trash>
@@ -42,6 +45,7 @@ function StoreCard({ storeObj, onUpdate }) {
 StoreCard.propTypes = {
   storeObj: PropTypes.shape({
     name: PropTypes.string,
+    storeSite: PropTypes.string,
     firebaseKey: PropTypes.string,
   }),
   onUpdate: PropTypes.func,

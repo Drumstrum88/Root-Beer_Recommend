@@ -7,6 +7,7 @@ import { createStore, updateStore } from './API/storeData';
 
 const initialState = {
   name: '',
+  storeSite: '',
 };
 
 export default function StoreForm({ obj }) {
@@ -51,6 +52,16 @@ export default function StoreForm({ obj }) {
           placeholder="Enter Store Name"
           name="name"
           value={formInput.name}
+          onChange={handleChange}
+          required
+        />
+      </FloatingLabel>
+      <FloatingLabel controlId="floatingInput1" label="Store URL" className="mb-3">
+        <Form.Control
+          type="url"
+          placeholder="Enter Store Url"
+          name="storeSite"
+          value={formInput.storeSite}
           onChange={handleChange}
           required
         />
