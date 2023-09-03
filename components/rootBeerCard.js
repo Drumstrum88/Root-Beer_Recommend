@@ -84,9 +84,19 @@ export default function RootBeerCard({ rootBeerObj, onUpdate, userFavorites }) {
         <Link href={`/rootBeer/${rootBeerObj.firebaseKey}`} passHref>
           <Eyeglasses type="button" className="m-2" id="viewBtn">View</Eyeglasses>
         </Link>
-        <Link href={`/rootBeer/edit/${rootBeerObj.firebaseKey}`} passHref>
-          <Pencil type="button" id="editBtn">Edit</Pencil>
-        </Link>
+        <Pencil
+          type="button"
+          id="editBtn"
+          onClick={() => {
+            // eslint-disable-next-line react/prop-types
+            if (user.uid === rootBeerObj.uid) {
+              window.location.href = `/rootBeer/edit/${rootBeerObj.firebaseKey}`;
+            } else {
+              alert('You do not have permission to edit this Root Beer');
+            }
+          }}
+        />
+
         <Trash
           type="button"
           onClick={deleteThisRootBeer}
