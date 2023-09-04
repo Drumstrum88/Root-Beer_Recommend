@@ -43,6 +43,7 @@ body {
   align-items: center;
   margin-top: auto;
   border-radius: 5%;
+  border: black 1px solid;
 }
 
 .d-inline-block {
@@ -51,7 +52,7 @@ body {
 }
 
 .card {
-  background-color: lightgray;
+  background-color:rgb(27, 81, 135);
   box-shadow: rgb(108, 136, 204) 0px 5px 10px;
   flex: 0 0 calc(33.33% - 20px);
   border-radius: 2%;
@@ -60,6 +61,8 @@ body {
   flex-direction: column;
  text-align: center;
   justify-content: center;
+  color: white;
+
 }
 
 .text-red-500 {
@@ -83,7 +86,7 @@ body {
 }
 
 .genericImage {
-  border: black 1px inset;
+  border: black 1px solid;
   border-radius: 5%;
 }
 
@@ -91,6 +94,10 @@ body {
   background-color: rgb(203, 0, 0);
   border: black inset 1px;
   width: 150px;
+}
+
+.m-2 {
+  color: black;
 }
 
 .userData {
@@ -126,18 +133,22 @@ body {
 .rankTable{
   background-color:#2E3A4F ;
   color: aliceblue;
+  border: black 1px solid;
 }
 table {
   margin: 20px;
   box-shadow:rgb(108, 136, 204) 0px 5px 10px;
   background-color:#2E3A4F ;
   color: aliceblue;
+  border: black 1px solid;
 }
 
 th {
   border-right: 1px solid lightgrey;
   padding: 10px;
+  border: black 1px solid;
 }
+
 .center-container {
   display: flex;
   flex-direction: column;
@@ -160,6 +171,23 @@ th {
 
 #sign-in {
   color: aliceblue;
+}
+
+.text-blue-500:hover,
+.text-red-500:hover,
+.m-2:hover {
+  animation: shaking 0.5s infinite;}
+      @keyframes shaking {
+         0% {transform: rotate(0deg);}
+         20% {transform: rotate(-4deg);}
+         50% {transform: rotate(0deg);}
+         70% {transform: rotate(4deg);}
+         100% {transform: rotate(0deg);}
+}
+
+.beer-logo {
+  border: 1px black solid;
+  background-color: lightgray;
 }
 
 .signIn {
