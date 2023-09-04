@@ -10,9 +10,9 @@ const viewRootBeerDetails = (firebaseKey) => new Promise((resolve, reject) => {
 });
 
 const viewStoreDetails = (storeFirebaseKey) => new Promise((resolve, reject) => {
-  getSingleStore(storeFirebaseKey) // Assuming you have a function like this
+  getSingleStore(storeFirebaseKey)
     .then((storeObj) => {
-      getStoreRootBeers(storeFirebaseKey) // Assuming you have a function like this
+      getStoreRootBeers(storeFirebaseKey)
         .then((storeBeersArray) => {
           resolve({ ...storeObj, rootBeers: storeBeersArray });
         })

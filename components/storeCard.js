@@ -2,7 +2,9 @@ import { Card } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { CurrencyDollar, Eyeglasses, Trash } from 'react-bootstrap-icons';
+import {
+  CurrencyDollar, Eyeglasses, Trash,
+} from 'react-bootstrap-icons';
 import { deleteStore, getUserStores } from './API/storeData';
 import { useAuth } from '../utils/context/authContext';
 

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Button, FloatingLabel, Form } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { useAuth } from '../utils/context/authContext';
-import { createStore, updateStore } from './API/storeData';
+import { createStore, getStores, updateStore } from './API/storeData';
 
 const initialState = {
   name: '',
@@ -12,10 +12,13 @@ const initialState = {
 
 export default function StoreForm({ obj }) {
   const [formInput, setFormInput] = useState(initialState);
+  const [store, setStore] = useState([]);
   const router = useRouter();
   const { user } = useAuth();
 
   useEffect(() => {
+    getStores().then(setStore);
+
     if (obj.firebaseKey) setFormInput(obj);
   }, [obj]);
 
@@ -30,7 +33,7 @@ export default function StoreForm({ obj }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (obj.firebaseKey) {
-      updateStore(formInput).then(() => router.push(`/Store/${obj.firebaseKey}`));
+      updateStore(formInput).then(() => router.push(`/Store/edit/${obj.firebaseKey}`));
     } else {
       const payload = { ...formInput, uid: user.uid };
       createStore(payload).then((data) => {
@@ -45,7 +48,7 @@ export default function StoreForm({ obj }) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <h2 className="text-white mt-5">{obj.firebaseKey ? 'Update' : 'Add'} Store</h2>
+      <h2 className="text-white mt-5">{store.firebaseKey ? 'Update' : 'Add'} Store</h2>
       <FloatingLabel controlId="floatingInput1" label="Store Name" className="mb-3">
         <Form.Control
           type="text"
@@ -66,7 +69,7 @@ export default function StoreForm({ obj }) {
           required
         />
       </FloatingLabel>
-      <Button className="genericBtn" type="submit">{obj.firebaseKey ? 'Update' : 'Add'} Store</Button>
+      <Button className="genericBtn" type="submit">{store.firebaseKey ? 'Update' : 'Add'} Store</Button>
     </Form>
   );
 }

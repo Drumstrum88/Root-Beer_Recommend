@@ -67,7 +67,7 @@ export default function RootBeerCard({ rootBeerObj, onUpdate, userFavorites }) {
         width: '12rem', margin: '10px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
       }}
     >
-      <Card.Img variant="top" src={rootBeerObj.image} alt={rootBeerObj.name} style={{ height: '225px' }} />
+      <Card.Img className="beer-logo" variant="top" src={rootBeerObj.image} alt={rootBeerObj.name} style={{ height: '225px' }} />
       <button
         type="button"
         className="btn btn-link"
@@ -87,6 +87,7 @@ export default function RootBeerCard({ rootBeerObj, onUpdate, userFavorites }) {
         <Pencil
           type="button"
           id="editBtn"
+          className="m-2"
           onClick={() => {
             // eslint-disable-next-line react/prop-types
             if (user.uid === rootBeerObj.uid) {
