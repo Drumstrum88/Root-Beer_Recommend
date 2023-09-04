@@ -76,6 +76,12 @@ body {
   margin-top: 1vh;
 }
 
+.genericBtn:hover{
+  background-color: rgb(231, 192, 21);
+  border: black 1px inset;
+  box-shadow: rgb(108, 136, 204) 0px 5px 10px;
+}
+
 .genericImage {
   border: black 1px inset;
   border-radius: 5%;
@@ -147,6 +153,11 @@ th {
   flex-wrap: wrap;
 }
 
+.search-bar {
+  height: 50px;
+
+}
+
 #sign-in {
   color: aliceblue;
 }
@@ -164,6 +175,12 @@ th {
   border: black inset 1px;
   margin-top: 10px;
   width: 15vh;
+}
+
+#signInBtn:hover{
+  background-color: rgb(231, 192, 21);
+  border: black 1px inset;
+  box-shadow: rgb(108, 136, 204) 0px 5px 10px;
 }
 
 #sign-in-logo {

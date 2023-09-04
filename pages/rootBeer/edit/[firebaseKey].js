@@ -34,8 +34,6 @@ export default function EditRootBeer() {
       } else {
         alert('You do not have permission to edit this root beer');
       }
-    } else {
-      setContent(<p>Loading...</p>);
     }
   }, [editRootBeer, user]);
 
