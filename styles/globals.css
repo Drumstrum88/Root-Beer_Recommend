@@ -51,18 +51,48 @@ body {
   border: black inset 1px;
 }
 
+.text-white-ms-5-details {
+  border: 1px black solid;
+  border-radius: 10px;
+  margin-top: 25px;
+  padding: 15px;
+  background-color:#505258;
+  color:aliceblue;
+
+}
+
+.root-beer-details-container {
+  margin-top: 50px;
+}
+
 .card {
   background-color:rgb(27, 81, 135);
   box-shadow: rgb(108, 136, 204) 0px 5px 10px;
   flex: 0 0 calc(33.33% - 20px);
   border-radius: 2%;
-  border: black inset 1px;
+  border: black solid 1px;
   display: flex;
   flex-direction: column;
- text-align: center;
+  text-align: center;
   justify-content: center;
   color: white;
 
+}
+
+.store-view,
+.store-url,
+.store-delete {
+  width: auto;
+  height: auto;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.store-card {
+  background-color: #2E3A4F;
+  height: 15vh;
+  border: black 1px solid;
+  color:aliceblue;
 }
 
 .text-red-500 {
@@ -173,6 +203,9 @@ th {
   color: aliceblue;
 }
 
+.store-view:hover,
+.store-url:hover,
+.store-delete:hover,
 .text-blue-500:hover,
 .text-red-500:hover,
 .m-2:hover {
@@ -183,6 +216,12 @@ th {
          50% {transform: rotate(0deg);}
          70% {transform: rotate(4deg);}
          100% {transform: rotate(0deg);}
+}
+
+.store-view:hover,
+.store-url:hover,
+.store-delete:hover {
+  color: rgb(231, 192, 21) ;
 }
 
 .beer-logo {
