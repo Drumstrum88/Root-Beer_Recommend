@@ -30,26 +30,24 @@ function StoreCard({ storeObj }) {
 
   return (
     <Card
-      className="card"
+      className="store-card"
       style={{
         width: '12rem', margin: '10px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
       }}
     >
       <Card.Body className="storeCard">
         <Card.Title>{storeObj.name}</Card.Title>
-        <div className="button-container">
-          <Link href={`/Stores/${storeObj.firebaseKey}`} passHref>
-            <Eyeglasses type="button" className="m-2">
-              Store Details
-            </Eyeglasses>
-          </Link>
-          <a href={storeObj.storeSite} target="_blank" rel="noopener noreferrer">
-            <CurrencyDollar type="button" className="m-2">{storeObj.storeSite}</CurrencyDollar>
-          </a>
-          <Trash type="button" onClick={deleteThisStore} className="m-2">
-            DELETE
-          </Trash>
-        </div>
+        <Link href={`/Stores/${storeObj.firebaseKey}`} passHref>
+          <Eyeglasses type="button" className="store-view">
+            Store Details
+          </Eyeglasses>
+        </Link>
+        <a href={storeObj.storeSite} target="_blank" rel="noopener noreferrer">
+          <CurrencyDollar type="button" className="store-url">{storeObj.storeSite}</CurrencyDollar>
+        </a>
+        <Trash type="button" onClick={deleteThisStore} className="store-delete">
+          DELETE
+        </Trash>
       </Card.Body>
     </Card>
   );

@@ -16,13 +16,13 @@ export default function ViewRootBeer() {
   }, [firebaseKey]);
 
   return (
-    <div className="mt-5 d-flex flex-wrap">
+    <div className="root-beer-details-container">
       <div className="d-flex flex-column">
         <img src={rootBeerDetails.image} alt={rootBeerDetails.name} style={{ width: '300px' }} className="genericImage" />
       </div>
-      <div className="text-white ms-5 details">
+      <div className="text-white-ms-5-details">
         <h5>
-          {rootBeerDetails.name} at : {rootBeerDetails.storeId}
+          {rootBeerDetails.name} found at : {rootBeerDetails.storeId}
         </h5>
         Root Beer Description: {rootBeerDetails.description}
         <hr />
