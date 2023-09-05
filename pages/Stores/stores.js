@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getStores } from '../../components/API/storeData';
+import { deleteStore, getStores } from '../../components/API/storeData';
 import { useAuth } from '../../utils/context/authContext';
 import StoreCard from '../../components/storeCard';
 
@@ -9,6 +9,12 @@ function AllStores() {
 
   const getAllStores = () => {
     getStores().then(setStores);
+  };
+
+  const handleDeleteStore = (storeKey) => {
+    deleteStore(storeKey).then(() => {
+      window.location.reload();
+    });
   };
 
   useEffect(() => {
@@ -25,6 +31,7 @@ function AllStores() {
               key={store.firebaseKey}
               storeObj={store}
               onUpdate={getAllStores}
+              onDelete={() => handleDeleteStore(store.firebaseKey)}
             />
           ))}
         </div>
