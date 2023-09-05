@@ -83,9 +83,8 @@ body {
 .store-url,
 .store-delete {
   width: auto;
-  height: auto;
-  margin-top: 20px;
-  padding: 10px;
+  margin-top:12%;
+
 }
 
 .store-card {
@@ -93,6 +92,19 @@ body {
   height: 15vh;
   border: black 1px solid;
   color:aliceblue;
+}
+
+@media (max-width: 768px) {
+  .store-card {
+    height: auto; /* Adjust the height to fit content */
+    padding: 10px; /* Add padding for better spacing */
+  }
+
+  .store-view,
+  .store-url,
+  .store-delete {
+    margin-top: 8px; /* Adjust the margin-top for better spacing */
+  }
 }
 
 .text-red-500 {
