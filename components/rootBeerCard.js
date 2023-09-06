@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { useState, useEffect } from 'react';
 import { Card } from 'react-bootstrap';
 import Link from 'next/link';
@@ -59,7 +58,6 @@ export default function RootBeerCard({ rootBeerObj, onUpdate, userFavorites }) {
       alert('You do not have permission to delete this root beer.');
     }
   };
-
   return (
     <Card
       className="card"
