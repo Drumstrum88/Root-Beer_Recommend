@@ -45,7 +45,7 @@ Root Beer Recommend is a web application built using React, Next.js, and Firebas
 
 ## Video Walkthrough
 
-[Add a Loom walk-through video here]
+(https://www.loom.com/share/c228c1e18c254127bff08983bb6bb9ef?sid=21e352d7-e3aa-4758-b037-e5a13740daae)
 
 ## Deployment
 
