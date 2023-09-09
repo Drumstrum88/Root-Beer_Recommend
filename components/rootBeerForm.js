@@ -73,7 +73,7 @@ function RootBeerForm({ obj }) {
         />
       </FloatingLabel>
 
-      <FloatingLabel controlId="floatingInput2" label="Root Beer Image" className="mb-3">
+      <FloatingLabel controlId="floatingInput2" label="Root Beer Image URL" className="mb-3">
         <Form.Control
           type="url"
           placeholder="Enter an image url"
