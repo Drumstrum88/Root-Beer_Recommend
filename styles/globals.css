@@ -138,6 +138,11 @@ body {
   width: 150px;
 }
 
+.comment-accordion {
+  margin-top: 2%;
+  margin-bottom: 2%;
+  border: 1px black solid;
+}
 .m-2 {
   color: black;
 }
