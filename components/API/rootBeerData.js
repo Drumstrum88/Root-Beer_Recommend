@@ -186,6 +186,65 @@ const getCommunityFavorites = () => new Promise((resolve, reject) => {
     .then((data) => resolve(data))
     .catch(reject);
 });
+
+const createComment = (payload) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/rootBeerComments.json`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
+const editComment = (payload) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/rootBeerComments/${payload.firebaseKey}.json`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+    .then((response) => response.json())
+    .then(() => resolve(payload))
+    .catch(reject);
+});
+
+const deleteComment = (firebaseKey) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/rootBeerComments/${firebaseKey}.json`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve((data)))
+    .catch(reject);
+});
+
+const getComments = (rootBeerFirebaseKey) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/rootBeerComments.json?orderBy="rootBeerFirebaseKey"&equalTo="${rootBeerFirebaseKey}"`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      // Check if data is not null and has valid comment objects
+      if (data && typeof data === 'object') {
+        const comments = Object.values(data);
+        resolve(comments);
+      } else {
+        resolve([]); // Return an empty array if no comments found
+      }
+    })
+    .catch(reject);
+});
+
 export {
-  getCommunityRootBeers, createRootBeer, editRootBeer, deleteRootBeer, getSingleRootBeer, getStoreRootBeers, getUserRootBeers, getUserFavorites, addFavorite, removeFavorite, getCommunityFavorites,
+  getCommunityRootBeers, createRootBeer, editRootBeer, deleteRootBeer, getSingleRootBeer, getStoreRootBeers, getUserRootBeers, getUserFavorites, addFavorite, removeFavorite, getCommunityFavorites, createComment, editComment, deleteComment, getComments,
 };
