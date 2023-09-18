@@ -1,4 +1,10 @@
 @import 'bootstrap/dist/css/bootstrap.css';
+/* CSS Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 html,
 body {
@@ -55,8 +61,9 @@ body {
   border: 1px black solid;
   border-radius: 10px;
   margin-top: 25px;
+  margin-bottom: 10px;
   padding: 15px;
-  background-color:#505258;
+  background-color:#2E3A4F;
   color:aliceblue;
 
 }
@@ -119,6 +126,7 @@ body {
   background-color: rgb(231, 192, 21);
   border: black 1px inset;
   margin-top: 1vh;
+  margin: 2px;
 }
 
 .genericBtn:hover{
@@ -143,6 +151,9 @@ body {
   margin-bottom: 2%;
   border: 1px black solid;
 }
+.comment-modal {
+  border: 1px rgb(27, 81, 135) solid;
+}
 .m-2 {
   color: black;
 }
@@ -150,6 +161,23 @@ body {
 .userData {
   background-color: gray;
   color: aliceblue;
+}
+.comment-head {
+  box-shadow: rgb(108, 136, 204) 0px 5px 10px;
+  max-width: auto;
+  text-align: center;
+  border: black solid 1px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
+  margin-top: auto;
+  font-size: x-large;
+  background-color: #2E3A4F;
+  color: aliceblue;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
 }
 .communityFavorites,
 .indexHead,
@@ -171,6 +199,21 @@ body {
   flex-direction: column;
   align-items: center; 
   justify-content: center;
+}
+
+.comment-text {
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  border-top: 1px black solid;
+  padding-top: 8px;
+  max-height: 200px !important;
+  overflow-y: auto !important;
+}
+
+
+.comment-accordion {
+  border: 1px black solid;
 }
 
 .favorite-count {
@@ -302,6 +345,9 @@ th {
 
 @media (min-width: 1200px) {
   .indexHead,
+  .comment-accordion,
+  .comment-modal,
+  .comment-head,
   .user-favorites,
   .userRecommends,
   .stores {
