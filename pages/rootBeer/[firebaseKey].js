@@ -127,7 +127,7 @@ export default function ViewRootBeer() {
           </div>
           <div className="text-white-ms-5-details">
             <h5>
-              {rootBeerDetails.name} found at : {rootBeerDetails.storeId}
+              {rootBeerDetails.name} found at: {rootBeerDetails.storeId}
             </h5>
             Root Beer Description: {rootBeerDetails.description}
             <hr />
@@ -149,14 +149,19 @@ export default function ViewRootBeer() {
         userName={user.displayName}
         initialComment={editingComment || null}
       />
-      {comments.length > 0 && (
-        <CommentList
-          comments={comments}
-          onDeleteComment={handleDeleteComment}
-          onEditComment={handleEditComment}
-          currentUser={user}
-        />
-      )}
+      <div className="comment-head">
+        <h3>Comments</h3>
+        {comments.length > 0 && (
+          <div style={{ maxHeight: '400px', overflowY: 'auto', maxWidth: '100%' }}>
+            <CommentList
+              comments={comments}
+              onDeleteComment={handleDeleteComment}
+              onEditComment={handleEditComment}
+              currentUser={user}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 }

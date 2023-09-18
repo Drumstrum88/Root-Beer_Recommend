@@ -35,7 +35,7 @@ function CommentFormModal({
   };
 
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <Dialog open={open} onClose={handleClose} className="comment-modal">
       <DialogTitle>{comment ? 'Edit Comment' : 'Add a Comment'}</DialogTitle>
       <DialogContent>
         <DialogContentText>

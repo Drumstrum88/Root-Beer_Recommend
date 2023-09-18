@@ -5,7 +5,6 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import PropTypes from 'prop-types';
@@ -16,6 +15,7 @@ function CommentList({
 }) {
   const [expanded, setExpanded] = useState([]);
   const { user } = useAuth();
+
   const handleAccordionChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
@@ -37,11 +37,12 @@ function CommentList({
           key={comment.firebaseKey}
           expanded={expanded === `panel-${index}`}
           onChange={handleAccordionChange(`panel-${index}`)}
+          style={{ maxWidth: '100%', overflow: 'hidden' }} // Ensure no horizontal overflow
         >
           <AccordionSummary
-            expandIcon={expanded === `panel-${index}` ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+            expandIcon={<ExpandMoreIcon />}
           >
-            <Typography>{comment.name}</Typography>
+            <Typography>{comment.name}&apos;s comment:</Typography>
             {user.uid === comment.uid && (
               <>
                 <IconButton onClick={(e) => handleDeleteClick(e, comment)}>
@@ -53,8 +54,8 @@ function CommentList({
               </>
             )}
           </AccordionSummary>
-          <AccordionDetails>
-            <Typography>{comment.text}</Typography>
+          <AccordionDetails style={{ maxHeight: '200px', overflowY: 'auto' }}>
+            <Typography className="comment-text">{comment.text}</Typography>
           </AccordionDetails>
         </Accordion>
       ))}
