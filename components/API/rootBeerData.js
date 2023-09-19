@@ -234,12 +234,11 @@ const getComments = (rootBeerFirebaseKey) => new Promise((resolve, reject) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      // Check if data is not null and has valid comment objects
       if (data && typeof data === 'object') {
         const comments = Object.values(data);
         resolve(comments);
       } else {
-        resolve([]); // Return an empty array if no comments found
+        resolve([]);
       }
     })
     .catch(reject);
