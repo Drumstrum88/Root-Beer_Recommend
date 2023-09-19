@@ -23,7 +23,6 @@ export default function ViewRootBeer() {
 
   useEffect(() => {
     if (firebaseKey) {
-      // Fetch root beer details when firebaseKey changes
       viewRootBeerDetails(firebaseKey)
         .then((rootBeerData) => {
           setRootBeerDetails(rootBeerData);
@@ -31,88 +30,68 @@ export default function ViewRootBeer() {
         .catch((error) => {
           console.error('Error fetching root beer details:', error);
         });
-
-      // Fetch comments for the specific root beer and filter by rootBeerFirebaseKey
       getComments(firebaseKey)
         .then((commentsData) => {
-          console.warn(commentsData); // Add this line for debugging
-
-          // Filter comments associated with the current root beer
+          console.warn(commentsData);
           const filteredComments = commentsData.filter(
             (comment) => comment.rootBeerFirebaseKey === firebaseKey,
           );
 
-          setComments(filteredComments); // Update the comments state
+          setComments(filteredComments);
         })
         .catch((error) => {
           console.error('Error fetching comments:', error);
-          // Handle the error here as needed
         });
     }
   }, [firebaseKey]);
 
   const handleDeleteComment = (comment) => {
     if (window.confirm('Delete this comment?')) {
-      // Call the deleteComment promise
       deleteComment(comment.firebaseKey)
         .then(() => {
-          // Handle success
           console.warn('Comment deleted successfully');
-          // Update the comments state to remove the deleted comment
           setComments((prevComments) => prevComments.filter((c) => c.firebaseKey !== comment.firebaseKey));
         })
         .catch((error) => {
-          // Handle error
           console.error('Error deleting comment:', error);
         });
     }
   };
 
   const handleEditComment = (comment) => {
-    // Set the comment data in your form state to allow editing
     setEditingComment(comment);
     setIsCommentFormOpen(true);
   };
 
   const handleCommentSubmit = (commentText) => {
-    // Create a new comment object with the relevant data
     const commentData = {
       text: commentText,
       uid: user.uid,
       rootBeerFirebaseKey: firebaseKey,
-      name: user.displayName, // Include the user's name
+      name: user.displayName,
     };
-
-    // Check if it's an edit or a new comment
     if (editingComment) {
-      // Call the editComment promise
       editComment(commentData)
         .then(() => {
           // Handle success
           console.warn('Comment edited successfully');
-          // Update the comments state with the edited comment
           setComments((prevComments) => prevComments.map((c) => (c.firebaseKey === editingComment.firebaseKey ? { ...c, text: commentText } : c)));
           setIsCommentFormOpen(false);
           setEditingComment(null);
         })
         .catch((error) => {
-          // Handle error
           console.error('Error editing comment:', error);
         });
     } else {
-      // Call the createComment promise
       createComment(commentData)
         .then(({ name }) => {
-          // Patch the comment's firebaseKey with the generated name
           const patchPayload = { firebaseKey: name };
           editComment(patchPayload);
           console.warn('Comment added successfully');
-          setIsCommentFormOpen(false); // Close the comment form modal
-          // Update the comments state with the newly added comment
+          setIsCommentFormOpen(false);
           setComments((prevComments) => [...prevComments, { ...commentData, firebaseKey: name }]);
         })
         .catch((error) => {
-          // Handle error
           console.error('Error adding comment:', error);
         });
     }

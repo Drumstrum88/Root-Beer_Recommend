@@ -21,12 +21,12 @@ function CommentList({
   };
 
   const handleDeleteClick = (e, comment) => {
-    e.preventDefault(); // Prevent accordion from toggling
+    e.preventDefault();
     onDeleteComment(comment);
   };
 
   const handleEditClick = (e, comment) => {
-    e.preventDefault(); // Prevent accordion from toggling
+    e.preventDefault();
     onEditComment(comment);
   };
 
@@ -37,7 +37,7 @@ function CommentList({
           key={comment.firebaseKey}
           expanded={expanded === `panel-${index}`}
           onChange={handleAccordionChange(`panel-${index}`)}
-          style={{ maxWidth: '100%', overflow: 'hidden' }} // Ensure no horizontal overflow
+          style={{ maxWidth: '100%', overflow: 'hidden' }}
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
