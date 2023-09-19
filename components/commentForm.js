@@ -13,13 +13,11 @@ function CommentFormModal({
   open, onClose, onSubmit, comment,
 }) {
   const [commentText, setCommentText] = useState(comment ? comment.text : ''); // Initialize with comment text
-
-  // Update commentText when the comment prop changes (for editing)
   useEffect(() => {
     if (comment) {
       setCommentText(comment.text);
     } else {
-      setCommentText(''); // Reset the text when adding a new comment
+      setCommentText('');
     }
   }, [comment]);
 
